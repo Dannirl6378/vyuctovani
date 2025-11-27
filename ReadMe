@@ -2,3 +2,6 @@ složka BackendData je zodověnda za fetch
 components řeší zobrazovani pomoci Mui knihovny v rozbalovacim listu a zobrazovaním dat 
 app je main page kde je input a button 
 a mám nachystany zustand kdyby to bylo komplexnější 
+pak spustit npm run build to uděla dist 
+a nakonec npx serve dist 
+a staticka stránka běží 
