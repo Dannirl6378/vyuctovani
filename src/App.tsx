@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Container, Input, Typography } from "@mui/material";
 import { fetchData } from "./backendData/fetchData";
 import ControlledAccordions from "./components/acordion";
+import Home from "./Pages/Home";
 
 type DataProps = any;
 
@@ -29,6 +30,7 @@ export default function App() {
 //zobrazovaní komponenty App
 	return (
 		<Container style={{ padding: 20 }}>
+			<Home />
 			<Typography variant='h4' gutterBottom>
 				Filmy z IMDb
 			</Typography>

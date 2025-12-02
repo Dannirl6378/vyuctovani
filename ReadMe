@@ -5,3 +5,12 @@ a mám nachystany zustand kdyby to bylo komplexnější
 pak spustit npm run build to uděla dist 
 a nakonec npx serve dist 
 a staticka stránka běží 
+tady to bere ze složky public zatm je to jen na jeden dokument 
+export async function loadFile() {
+  const res = await fetch("/2025_demo.uc");
+  if (!res.ok) throw new Error("Soubor nenalezen");
+
+  const text = await res.text();
+  console.log("Fetched file content:", text);
+  return text;
+};
