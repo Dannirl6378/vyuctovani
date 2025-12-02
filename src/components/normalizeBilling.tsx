@@ -1,5 +1,4 @@
 import { Billing } from "../types/billing";
-
 export function normalizeBilling(json: any): Billing {
   return {
     id: "",
@@ -39,13 +38,14 @@ export function normalizeBilling(json: any): Billing {
     otherFees: {
       year2025: json["ostatni poplatky"]?.[0]?.[2025] || 0,
     },
-    deposits: json.zalohy || [],
-    customItems: Object.entries(json.custom || {}).map(([k, v]) => {
-      const n = Number(v as any);
-      return {
-        label: k,
-        amount: Number.isFinite(n) ? n : 0
-      };
-    })
+    deposits: (json.zalohy || []).map((obj: Record<string, number>) => {
+      const date = Object.keys(obj)[0];
+      const amount = obj[date];
+      return { date, amount };
+    }),
+    customItems: Object.entries(json.custom || {}).map(([k, v]) => ({
+      label: k,
+      amount: Number(v) || 0
+    }))
   };
 }

@@ -24,6 +24,10 @@ const emptyBilling: Billing = {
   deposits: [],
   customItems: []
 };
+interface RawDeposit {
+  [key: string]: number;
+}
+
 
 export default function BillingEditor({ billing }: Props) {
   const [formData, setFormData] = useState<Billing>({
@@ -37,6 +41,7 @@ export default function BillingEditor({ billing }: Props) {
     hotWater: { ...emptyBilling.hotWater, ...billing.hotWater },
     heating: { ...emptyBilling.heating, ...billing.heating },
     otherFees: { ...emptyBilling.otherFees, ...billing.otherFees },
+    deposits: billing.deposits,
   });
 
   const [rowFlags, setRowFlags] = useState<RowFlags>({});
@@ -151,6 +156,17 @@ export default function BillingEditor({ billing }: Props) {
 
       {/* Ostatní poplatky */}
       {renderRow("Ostatní poplatky 2025", "otherFees.year2025", formData.otherFees.year2025)}
+
+      <Typography variant="h6" sx={{ mt: 3 }}>
+        Přijaté zálohy
+      </Typography>
+      {formData.deposits.map((d, i) => (
+        <Box key={i} sx={{ mb: 2 }}>
+          {renderRow(`Datum zálohy`, `deposits.${i}.date`, d.date)}
+          {renderRow(`Částka zálohy`, `deposits.${i}.amount`, d.amount)}
+        </Box>
+      ))}
+  
     </Box>
   );
 }
